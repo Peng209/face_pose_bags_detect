@@ -1,0 +1,15 @@
+facenet_pytorch
+--index-url https://download.pytorch.org/whl/cu121
+torch
+torchvision
+torchaudio
+
+opencv-python~=4.11.0.86
+Pillow
+ultralytics~=8.3.100
+numpy
+
+
+pyinstaller
+
+# cuda121  cudnn 8.9
