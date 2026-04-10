@@ -9,8 +9,8 @@ a = Analysis(
     pathex=[os.path.abspath(".")],
     binaries=[],
     datas=[
-        ('best.pt', '.'),                 # 模型文件
-        ('pose.pt', '.'),                 # 模型文件
+        ('models/best.pt', 'models'),     # 模型文件
+        ('models/pose.pt', 'models'),     # 模型文件
         ('db.sqlite3', '.'),                 # SQLite 数据库
         ('known_faces', 'known_faces'),     # 人脸图像文件夹
     ],

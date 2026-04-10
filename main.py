@@ -15,7 +15,7 @@ video_cap = None
 def select_video_file():
     filepath = filedialog.askopenfilename(
         title="选择视频文件",
-        filetypes=[("视频文件", "*.mp4 *.avi *.mov"), ("所有文件", "*.*")]
+        filetypes=[("视频文件", "*.mp4 *.avi *.mov"), ("所有文件", "*.*")],
     )
     return filepath if filepath else None
 
@@ -93,12 +93,24 @@ video_label.pack()
 btn_frame = Frame(root)
 btn_frame.pack(pady=10)
 
-Button(btn_frame, text="摄像头识别", command=lambda: start_video(0), width=15).grid(row=0, column=0, padx=10)
-Button(btn_frame, text="视频文件识别", command=lambda: start_video(1), width=15).grid(row=0, column=1, padx=10)
-Button(btn_frame, text="停止识别", command=stop_video, width=15).grid(row=0, column=2, padx=10)
-Button(btn_frame, text="注册人脸", command=lambda: register_face(last_frame), width=15).grid(row=1, column=0, padx=10, pady=10)
-Button(btn_frame, text="重新加载人脸", command=logic.reload_faces, width=15).grid(row=1, column=1, padx=10, pady=10)
-Button(btn_frame, text="退出", command=on_exit, width=15).grid(row=1, column=2, padx=10, pady=10)
+Button(btn_frame, text="摄像头识别", command=lambda: start_video(0), width=15).grid(
+    row=0, column=0, padx=10
+)
+Button(btn_frame, text="视频文件识别", command=lambda: start_video(1), width=15).grid(
+    row=0, column=1, padx=10
+)
+Button(btn_frame, text="停止识别", command=stop_video, width=15).grid(
+    row=0, column=2, padx=10
+)
+Button(
+    btn_frame, text="注册人脸", command=lambda: register_face(last_frame), width=15
+).grid(row=1, column=0, padx=10, pady=10)
+Button(btn_frame, text="重新加载人脸", command=logic.reload_faces, width=15).grid(
+    row=1, column=1, padx=10, pady=10
+)
+Button(btn_frame, text="退出", command=on_exit, width=15).grid(
+    row=1, column=2, padx=10, pady=10
+)
 
 logic.reload_faces()
 root.mainloop()
