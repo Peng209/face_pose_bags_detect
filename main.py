@@ -84,7 +84,7 @@ def on_exit():
 
 
 root = Tk()
-root.title("人脸识别 + 行李识别系统")
+root.title("人脸认证 + 姿态检测 + 行李识别系统")
 root.geometry("1080x720")
 
 video_label = Label(root)
