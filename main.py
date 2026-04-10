@@ -2,8 +2,8 @@ import cv2
 import os
 import numpy as np
 import sqlite3
-from tkinter import *
 from tkinter import simpledialog, messagebox, filedialog
+from tkinter import Button, Frame, Label, Tk, filedialog, messagebox, simpledialog
 from PIL import Image, ImageTk
 from datetime import datetime
 from threading import Thread
