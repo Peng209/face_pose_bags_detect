@@ -13,4 +13,4 @@ models/*.onnx
 
 # runing data
 db.sqlite3
-known_faces/
+known_faces/*
