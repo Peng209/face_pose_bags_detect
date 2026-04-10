@@ -7,8 +7,8 @@ __pycache__/
 
 
 # local weights
-models/*.pt
-models/*.onnx
+models/facenet/20180402-114759-vggface2.pt
+models/trained/*.pt
 
 
 # runing data
