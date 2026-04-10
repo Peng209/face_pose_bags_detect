@@ -24,13 +24,27 @@ known_embeddings, known_names = [], []
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"✅ 使用设备: {device} ({'GPU加速' if device.type == 'cuda' else 'CPU'})")
 
-yolo_model = YOLO(resource_path(os.path.join("models", "best.pt")))
-pose_model = YOLO(resource_path(os.path.join("models", "pose.pt")))
+yolo_model = YOLO(resource_path(os.path.join("models", "trained", "best.pt")))
+pose_model = YOLO(resource_path(os.path.join("models", "trained", "pose.pt")))
 yolo_model.to(device)
 pose_model.to(device)
 
 mtcnn = MTCNN(keep_all=True, device=device)
-resnet = InceptionResnetV1(pretrained="vggface2").eval().to(device)
+
+# 使用本地权重，避免网络问题下载失败
+_vggface2_weights_path = resource_path(
+    os.path.join("models", "facenet", "20180402-114759-vggface2.pt")
+)
+resnet = InceptionResnetV1(pretrained=None).eval().to(device)
+_state = torch.load(_vggface2_weights_path, map_location=device)
+# 兼容不同保存格式：有的文件是 {"state_dict": ...}
+if isinstance(_state, dict) and "state_dict" in _state and isinstance(_state["state_dict"], dict):
+    _state = _state["state_dict"]
+# 有些权重会带分类头(logits)，而当前模型用于提特征不需要它
+if isinstance(_state, dict):
+    _state.pop("logits.weight", None)
+    _state.pop("logits.bias", None)
+resnet.load_state_dict(_state, strict=False)
 
 threshold = 0.9
 
